@@ -21,12 +21,21 @@ def employee_overview(request):
     sales_avg_salary = Employee.objects.filter(department__name='Sales').aggregate(avg_salary=Avg('salary'))['avg_salary']
     sales_avg_salary = round(sales_avg_salary, 2) if sales_avg_salary else 0.00
 
+
+   # Aufgabe 5: Mitarbeiter vor 1. Jan 2022, nicht in HR
+    early_non_hr_employees = Employee.objects.filter(
+        hire_date__lt=date(2022, 1, 1)
+    ).exclude(
+        department__name='HR'
+    ).values('name', 'department__name', 'hire_date')
+
    # Context für das Template
     context = {
         'employees': employees,
         'high_earners': high_earners,
         'high_salary_count': high_salary_count,
         'sales_avg_salary': sales_avg_salary,
+        'early_non_hr_employees': early_non_hr_employees,
     }
 
     return render(request, 'employees/employee_list.html')
