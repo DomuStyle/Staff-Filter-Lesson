@@ -22,6 +22,30 @@
 
     <h2 style="color:red">Antworten:</h2>
 
-    <!-- Hier eure Antworten rendern -->
+    <!-- Aufgabe 1: Liste aller Mitarbeiter -->
+    <h3>Aufgabe 1: Mitarbeiterliste</h3>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Abteilung</th>
+          <th>Gehalt (€)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for employee in employees %}
+        <tr>
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.department__name }}</td>
+          <td>{{ employee.salary }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="3">Keine Mitarbeiter gefunden.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
   </body>
 </html>
