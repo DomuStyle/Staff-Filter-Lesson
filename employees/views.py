@@ -17,11 +17,16 @@ def employee_overview(request):
    # Aufgabe 3: Anzahl der Mitarbeiter mit Gehalt ≥ 5000 €
     high_salary_count = Employee.objects.filter(salary__gte=5000).count()
    
+   # Aufgabe 4: Durchschnittsgehalt im Sales-Team
+    sales_avg_salary = Employee.objects.filter(department__name='Sales').aggregate(avg_salary=Avg('salary'))['avg_salary']
+    sales_avg_salary = round(sales_avg_salary, 2) if sales_avg_salary else 0.00
+
    # Context für das Template
     context = {
         'employees': employees,
         'high_earners': high_earners,
         'high_salary_count': high_salary_count,
+        'sales_avg_salary': sales_avg_salary,
     }
 
     return render(request, 'employees/employee_list.html')
