@@ -11,9 +11,13 @@ def employee_overview(request):
    # QuerySet für Mitarbeiter mit Name, Abteilung und Gehalt
     employees = Employee.objects.all().select_related('department').values('name', 'department__name', 'salary')
     
+   # Aufgabe 2: Namen von Mitarbeitern mit Gehalt > 3000 €
+    high_earners = Employee.objects.filter(salary__gt=3000).values('name')
+    
    # Context für das Template
     context = {
         'employees': employees,
+        'high_earners': high_earners,
     }
 
     return render(request, 'employees/employee_list.html')

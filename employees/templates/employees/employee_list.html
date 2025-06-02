@@ -46,6 +46,16 @@
         {% endfor %}
       </tbody>
     </table>
+
+    <!-- Aufgabe 2: Mitarbeiter mit Gehalt > 3000 € -->
+    <h3>Aufgabe 2: Mitarbeiter mit Gehalt > 3000 €</h3>
+    <ul>
+      {% for employee in high_earners %}
+      <li>{{ employee.name }}</li>
+      {% empty %}
+      <li>Keine Mitarbeiter mit Gehalt über 3000 € gefunden.</li>
+      {% endfor %}
+    </ul>
     
   </body>
 </html>
