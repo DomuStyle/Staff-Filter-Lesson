@@ -38,4 +38,4 @@ def employee_overview(request):
         'early_non_hr_employees': early_non_hr_employees,
     }
 
-    return render(request, 'employees/employee_list.html')
+    return render(request, 'employees/employee_list.html', context)
